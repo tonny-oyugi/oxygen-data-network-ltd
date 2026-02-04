@@ -57,3 +57,14 @@ footer {
     text-align: center;
     padding: 15px;
 }
+
+.project-gallery {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.project-gallery img {
+    width: 280px;
+    border-radius: 5px;
+}
