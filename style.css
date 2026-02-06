@@ -151,3 +151,28 @@ ul li {
     margin-top: 20px;
 }
 
+.horizontal-gallery {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px 0;
+    scroll-snap-type: x mandatory;
+}
+
+.horizontal-gallery::-webkit-scrollbar {
+    height: 6px;
+}
+
+.horizontal-gallery::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 4px;
+}
+
+.horizontal-gallery img,
+.horizontal-gallery video {
+    flex: 0 0 auto;
+    width: 260px;
+    border-radius: 6px;
+    scroll-snap-align: start;
+}
+
