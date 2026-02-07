@@ -143,8 +143,7 @@ function openModal(index) {
 }
 
 function closeModal() {
-    const modal = document.getElementById('mediaModal');
-    modal.classList.remove('active');
+    document.getElementById('mediaModal').classList.remove('active');
     document.getElementById('mediaContent').innerHTML = '';
 }
 
