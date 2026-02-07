@@ -1,56 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Oxygen Data Network Ltd</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects | Oxygen Data Network Ltd</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
-    <h1>Our Projects</h1>
-    <p>Ongoing and Completed Works</p>
+<h1>Our Projects</h1>
+<p>Ongoing and Completed Works</p>
 </header>
 
- <a href="index.html" class="back-link">← Back to Home</a>
-   
+<a href="index.html" class="back-link">← Back to Home</a>
+
 <main>
 
 <section>
-    <h2>Ongoing Projects</h2>
-    <p>
-        The following are some of our ongoing drilling,
-        blasting, and compressor-based works currently
-        under execution.
-    </p>
+<h2>Ongoing Projects</h2>
+<p>Selected ongoing drilling, blasting, and compressor-based operations.</p>
+
+<button class="gallery-reset" onclick="resetGallery(this)">⟲ Back to Start</button>
+
+<div class="gallery-wrapper">
+
+<button class="gallery-btn left"
+onclick="this.nextElementSibling.scrollBy({left:-320,behavior:'smooth'})">‹</button>
 
 <div class="horizontal-gallery">
-    <img src="Team at work.jpeg" alt="Ongoing drilling">
-    <img src="Blasting Aftermath at Ziwa Sirikwa.jpeg" alt="Ongoing blasting">
+
+<div class="media-card">
+<img src="Team at work.jpeg" loading="lazy">
 </div>
 
+<div class="media-card">
+<img src="Compressor on Site.jpeg" loading="lazy">
+</div>
+
+<div class="media-card video">
+<video src="project 9.mp4" controls muted playsinline preload="none"></video>
+</div>
+
+</div>
+
+<button class="gallery-btn right"
+onclick="this.previousElementSibling.scrollBy({left:320,behavior:'smooth'})">›</button>
+
+</div>
 </section>
 
 <section>
-    <h2>Completed Projects</h2>
-    <p>
-        These are selected projects successfully completed
-        by Oxygen Data Network Ltd, delivered in line with
-        safety and quality standards.
-    </p>
+<h2>Completed Projects</h2>
+<p>Selected completed works delivered in line with safety and quality standards.</p>
+
+<button class="gallery-reset" onclick="resetGallery(this)">⟲ Back to Start</button>
+
+<div class="gallery-wrapper">
+
+<button class="gallery-btn left"
+onclick="this.nextElementSibling.scrollBy({left:-320,behavior:'smooth'})">‹</button>
 
 <div class="horizontal-gallery">
-    <img src="Blasting Aftermath at Ziwa Sirikwa.jpeg" alt="Completed project">
+
+<div class="media-card">
+<img src="Blasting Aftermath at Ziwa Sirikwa.jpeg" loading="lazy">
 </div>
 
+</div>
+
+<button class="gallery-btn right"
+onclick="this.previousElementSibling.scrollBy({left:320,behavior:'smooth'})">›</button>
+
+</div>
 </section>
 
 </main>
 
 <footer>
-    <p>© 2026 Oxygen Data Network Ltd</p>
+<p>© 2026 Oxygen Data Network Ltd</p>
 </footer>
+
+<script>
+function resetGallery(btn){
+    const gallery = btn.nextElementSibling.querySelector('.horizontal-gallery');
+    gallery.scrollTo({left:0,behavior:'smooth'});
+}
+
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(!e.isIntersecting && !e.target.paused){ e.target.pause(); }
+});
+},{threshold:0.5});
+
+document.querySelectorAll('video').forEach(v=>observer.observe(v));
+</script>
 
 </body>
 </html>
