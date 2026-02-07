@@ -209,3 +209,11 @@ ul li {
 .horizontal-gallery {
     overscroll-behavior-x: contain;
 }
+
+.horizontal-gallery {
+    cursor: grab;
+}
+
+.horizontal-gallery.dragging {
+    cursor: grabbing;
+}
