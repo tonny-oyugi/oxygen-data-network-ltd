@@ -96,6 +96,65 @@ if(!e.isIntersecting && !e.target.paused){ e.target.pause(); }
 
 document.querySelectorAll('video').forEach(v=>observer.observe(v));
 </script>
+<script>
+let mediaItems = [];
+let currentIndex = 0;
+
+function initMediaViewer() {
+    mediaItems = Array.from(document.querySelectorAll('.media-card img, .media-card video'));
+
+    mediaItems.forEach((item, index) => {
+        item.addEventListener('click', () => openModal(index));
+    });
+}
+
+function openModal(index) {
+    currentIndex = index;
+    const modal = document.getElementById('mediaModal');
+    const content = document.getElementById('mediaContent');
+    content.innerHTML = '';
+
+    const original = mediaItems[index];
+    let clone;
+
+    if (original.tagName === 'VIDEO') {
+        clone = original.cloneNode(true);
+        clone.controls = true;
+        clone.muted = false;
+        clone.play();
+    } else {
+        clone = document.createElement('img');
+        clone.src = original.src;
+    }
+
+    content.appendChild(clone);
+    modal.classList.add('active');
+}
+
+function closeModal() {
+    const modal = document.getElementById('mediaModal');
+    modal.classList.remove('active');
+    document.getElementById('mediaContent').innerHTML = '';
+}
+
+function nextMedia() {
+    currentIndex = (currentIndex + 1) % mediaItems.length;
+    openModal(currentIndex);
+}
+
+function prevMedia() {
+    currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
+    openModal(currentIndex);
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowRight') nextMedia();
+    if (e.key === 'ArrowLeft') prevMedia();
+});
+
+window.addEventListener('load', initMediaViewer);
+</script>
 
 </body>
 </html>
