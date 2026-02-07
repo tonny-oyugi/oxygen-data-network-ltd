@@ -195,3 +195,13 @@ ul li {
 .back-link:hover {
     background: #e0e0e0;
 }
+
+.gallery-reset {
+    background: #f4f4f4;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
