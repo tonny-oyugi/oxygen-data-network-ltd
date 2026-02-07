@@ -99,5 +99,20 @@ document.querySelectorAll('.horizontal-gallery').forEach(gallery => {
 });
 </script>
 
+<script>
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        const video = entry.target;
+        if (!entry.isIntersecting && !video.paused) {
+            video.pause();
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('video').forEach(video => {
+    observer.observe(video);
+});
+</script>
+
 </body>
 </html>
