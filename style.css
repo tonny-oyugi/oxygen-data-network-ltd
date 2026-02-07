@@ -155,25 +155,29 @@ ul li {
     display: flex;
     gap: 15px;
     overflow-x: auto;
-    padding: 10px 0;
+    padding: 12px 0;
     scroll-snap-type: x mandatory;
 }
 
 .horizontal-gallery::-webkit-scrollbar {
-    height: 6px;
+    height: 8px;
 }
 
 .horizontal-gallery::-webkit-scrollbar-thumb {
-    background: #bbb;
+    background: #999;
     border-radius: 4px;
 }
 
+/* MEDIA CARD */
 .horizontal-gallery img,
 .horizontal-gallery video {
     flex: 0 0 auto;
-    width: 260px;
+    width: 280px;
+    height: 200px;              /* LOCK HEIGHT */
+    object-fit: cover;          /* PREVENT DISTORTION */
     border-radius: 6px;
     scroll-snap-align: start;
+    background: #000;
 }
 
 .back-link {
