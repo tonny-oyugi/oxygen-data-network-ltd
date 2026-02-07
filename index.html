@@ -57,7 +57,7 @@
     rock drilling, blasting, and compressor-based projects.
     </p>
     
-<button class="gallery-reset" onclick="this.nextElementSibling.scrollTo({ left: 0, behavior: 'smooth' })">
+<button class="gallery-reset" onclick="resetGallery(this)">
     ⟲ Back to Start
 </button>
 
@@ -165,6 +165,14 @@ document.querySelectorAll('.horizontal-gallery').forEach(gallery => {
         gallery.scrollLeft = scrollLeft - walk;
     });
 });
+</script>
+
+<script>
+function resetGallery(btn) {
+    const wrapper = btn.nextElementSibling;
+    const gallery = wrapper.querySelector('.horizontal-gallery');
+    gallery.scrollTo({ left: 0, behavior: 'smooth' });
+}
 </script>
 
 </body>
