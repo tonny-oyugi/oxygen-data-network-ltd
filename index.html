@@ -95,10 +95,12 @@
 </footer>
 
 <script>
-document.querySelectorAll('.horizontal-gallery').forEach(gallery => {
-    gallery.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        gallery.scrollLeft += e.deltaY;
+window.addEventListener('load', function () {
+    document.querySelectorAll('.horizontal-gallery').forEach(gallery => {
+        gallery.addEventListener('wheel', function (e) {
+            e.preventDefault();
+            gallery.scrollLeft += e.deltaY;
+        }, { passive: false });
     });
 });
 </script>
