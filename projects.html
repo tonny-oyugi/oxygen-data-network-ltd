@@ -110,6 +110,7 @@ document.querySelectorAll('video').forEach(v=>observer.observe(v));
 <script>
 let mediaItems = [];
 let currentIndex = 0;
+let startX = 0;
 
 function initMediaViewer() {
     mediaItems = Array.from(document.querySelectorAll('.media-card img, .media-card video'));
@@ -121,10 +122,11 @@ function initMediaViewer() {
 
 function openModal(index) {
     currentIndex = index;
-    document.body.style.overflow = 'hidden';
     const modal = document.getElementById('mediaModal');
     const content = document.getElementById('mediaContent');
+
     content.innerHTML = '';
+    document.body.style.overflow = 'hidden';
 
     const original = mediaItems[index];
     let clone;
@@ -133,18 +135,30 @@ function openModal(index) {
         clone = original.cloneNode(true);
         clone.controls = true;
         clone.muted = false;
+        clone.playsInline = true;
         clone.play();
     } else {
         clone = document.createElement('img');
         clone.src = original.src;
     }
 
+    clone.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+    });
+
+    clone.addEventListener('touchend', e => {
+        const endX = e.changedTouches[0].clientX;
+        if (endX - startX > 50) prevMedia();
+        if (startX - endX > 50) nextMedia();
+    });
+
     content.appendChild(clone);
     modal.classList.add('active');
 }
 
 function closeModal() {
-    document.getElementById('mediaModal').classList.remove('active');
+    const modal = document.getElementById('mediaModal');
+    modal.classList.remove('active');
     document.getElementById('mediaContent').innerHTML = '';
     document.body.style.overflow = '';
 }
@@ -167,6 +181,7 @@ document.addEventListener('keydown', e => {
 
 window.addEventListener('load', initMediaViewer);
 </script>
+
 
 </body>
 </html>
