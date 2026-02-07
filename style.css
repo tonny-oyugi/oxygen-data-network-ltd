@@ -1,77 +1,83 @@
+/* ===============================
+   GLOBAL RESET & BASE
+================================ */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    line-height: 1.6;
     color: #333;
-}
-
-header {
-    background: #0b3c5d;
-    color: white;
-    text-align: center;
-    padding: 40px 20px;
-}
-
-header p {
-    font-size: 18px;
-    margin-top: 10px;
-}
-
-body {
+    line-height: 1.6;
     font-size: 16px;
-}
-
-header h1 {
-    margin-bottom: 10px;
 }
 
 h1 {
     font-size: 32px;
+    margin-bottom: 10px;
 }
 
 h2 {
     font-size: 22px;
+    color: #0b3c5d;
 }
 
 p {
     font-size: 17px;
-    line-height: 1.7;
+}
+
+/* ===============================
+   HEADER & NAV
+================================ */
+header {
+    background: #0b3c5d;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+header p {
+    font-size: 18px;
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
 }
 
 .whatsapp-btn {
     display: inline-block;
-    margin-top: 15px;
+    margin-top: 18px;
     padding: 12px 22px;
-    background-color: #25D366;
+    background: #25D366;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
 }
 
+/* ===============================
+   LAYOUT
+================================ */
 main {
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
-    padding: 30px 20px;
+    padding: 40px 20px;
 }
 
-h2 {
-    color: #0b3c5d;
-}
-
-nav {
-    margin: 15px 0;
-}
-
-nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-nav a:hover {
-    text-decoration: underline;
+section {
+    margin-bottom: 50px;
 }
 
 footer {
@@ -80,75 +86,25 @@ footer {
     padding: 15px;
 }
 
-.project-gallery {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+/* ===============================
+   BACK LINK
+================================ */
+.back-link {
+    display: inline-block;
+    margin: 20px;
+    padding: 8px 14px;
+    background: #f4f4f4;
+    color: #0b3c5d;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
-.project-gallery img {
-    width: 280px;
-    border-radius: 5px;
-}
-
-section {
-    margin-bottom: 40px;
-}
-
-ul {
-    padding-left: 20px;
-}
-
-ul li {
-    margin-bottom: 10px;
-}
-
-@media (max-width: 768px) {
-
-    header {
-        padding: 70px 20px;
-    }
-
-    h1 {
-        font-size: 26px;
-    }
-
-    header p {
-        font-size: 16px;
-    }
-
-    nav a {
-        display: inline-block;
-        margin: 6px;
-        font-size: 15px;
-    }
-
-    .whatsapp-btn {
-        padding: 14px 22px;
-        font-size: 16px;
-    }
-
-    main {
-        padding: 25px 18px;
-    }
-
-    p {
-        font-size: 16px;
-    }
-
-    .project-gallery {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .project-gallery img {
-        width: 100%;
-        max-width: 340px;
-    }
-}
-
-.project-gallery {
-    margin-top: 20px;
+/* ===============================
+   PREMIUM GALLERY SYSTEM
+================================ */
+.gallery-wrapper {
+    position: relative;
 }
 
 .horizontal-gallery {
@@ -168,27 +124,16 @@ ul li {
     border-radius: 4px;
 }
 
-/* MEDIA CARD */
+/* MEDIA CARD — THE CORE */
 .media-card {
     flex: 0 0 auto;
-    width: 280px;
-    height: 180px;
+    width: 300px;
+    height: 190px;
     border-radius: 8px;
     overflow: hidden;
     background: #000;
     scroll-snap-align: start;
-}
-
-.back-link {
-    display: inline-block;
-    margin: 15px 0;
-    padding: 8px 14px;
-    background: #f4f4f4;
-    color: #0b3c5d;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 14px;
+    position: relative;
 }
 
 .media-card img,
@@ -199,91 +144,7 @@ ul li {
     display: block;
 }
 
-.media-card video {
-    max-height: 100%;
-}
-
-@media (max-width: 768px) {
-    .media-card {
-        width: 260px;
-        height: 170px;
-    }
-}
-
-.back-link:hover {
-    background: #e0e0e0;
-}
-
-.gallery-reset {
-    background: #f4f4f4;
-    border: none;
-    padding: 6px 12px;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 8px;
-}
-
-.horizontal-gallery {
-    overscroll-behavior-x: contain;
-}
-
-.horizontal-gallery {
-    cursor: grab;
-}
-
-.horizontal-gallery.dragging {
-    cursor: grabbing;
-}
-
-.gallery-wrapper {
-    position: relative;
-}
-
-.gallery-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0,0,0,0.6);
-    color: white;
-    border: none;
-    font-size: 24px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.gallery-btn.left { left: 5px; }
-.gallery-btn.right { right: 5px; }
-
-@media (max-width: 768px) {
-    .gallery-btn {
-        display: none;
-    }
-}
-
-.horizontal-gallery img,
-.horizontal-gallery video {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.horizontal-gallery img:hover,
-.horizontal-gallery video:hover {
-    transform: scale(1.04);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-}
-
-.horizontal-gallery {
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-}
-
-.media-card {
-    position: relative;
-}
-
+/* VIDEO BADGE */
 .media-card.video::after {
     content: "VIDEO";
     position: absolute;
@@ -294,4 +155,49 @@ ul li {
     font-size: 11px;
     padding: 3px 6px;
     border-radius: 3px;
+}
+
+/* GALLERY CONTROLS */
+.gallery-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.gallery-btn.left { left: 5px; }
+.gallery-btn.right { right: 5px; }
+
+.gallery-reset {
+    background: #f4f4f4;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* ===============================
+   MOBILE
+================================ */
+@media (max-width: 768px) {
+
+    h1 { font-size: 26px; }
+    p { font-size: 16px; }
+
+    .media-card {
+        width: 260px;
+        height: 170px;
+    }
+
+    .gallery-btn {
+        display: none;
+    }
 }
