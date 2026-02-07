@@ -121,6 +121,7 @@ function initMediaViewer() {
 
 function openModal(index) {
     currentIndex = index;
+    document.body.style.overflow = 'hidden';
     const modal = document.getElementById('mediaModal');
     const content = document.getElementById('mediaContent');
     content.innerHTML = '';
@@ -145,6 +146,7 @@ function openModal(index) {
 function closeModal() {
     document.getElementById('mediaModal').classList.remove('active');
     document.getElementById('mediaContent').innerHTML = '';
+    document.body.style.overflow = '';
 }
 
 function nextMedia() {
