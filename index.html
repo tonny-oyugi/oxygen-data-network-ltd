@@ -62,12 +62,26 @@
     ⟲ Back to Start
 </button>
 
+<div class="gallery-wrapper">
+
+    <button class="gallery-btn left"
+        onclick="this.nextElementSibling.scrollBy({ left: -300, behavior: 'smooth' })">
+        ‹
+    </button>
+
     <div class="horizontal-gallery">
         <img src="Team at work.jpeg" alt="Rock drilling project">
         <img src="Blasting Aftermath at Ziwa Sirikwa.jpeg" alt="Blasting operations">
         <img src="Compressor on Site.jpeg" alt="Compressor works">
         <video src="project 9.mp4" controls></video>
     </div>
+
+    <button class="gallery-btn right"
+        onclick="this.previousElementSibling.scrollBy({ left: 300, behavior: 'smooth' })">
+        ›
+    </button>
+
+</div>
 
 </section>
 
@@ -156,3 +170,4 @@ document.querySelectorAll('.horizontal-gallery').forEach(gallery => {
 
 </body>
 </html>
+
