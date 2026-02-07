@@ -90,5 +90,14 @@
     <p>© 2026 Oxygen Data Network Ltd</p>
 </footer>
 
+<script>
+document.querySelectorAll('.horizontal-gallery').forEach(gallery => {
+    gallery.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        gallery.scrollLeft += e.deltaY;
+    });
+});
+</script>
+
 </body>
 </html>
