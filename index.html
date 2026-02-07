@@ -124,7 +124,8 @@ if(!e.isIntersecting && !e.target.paused){ e.target.pause(); }
 document.querySelectorAll('video').forEach(v=>observer.observe(v));
 </script>
 <!-- FULLSCREEN MEDIA MODAL -->
-<div id="mediaModal" class="media-modal">
+<!-- FULLSCREEN MEDIA MODAL -->
+<div id="mediaModal" class="media-modal" onclick="handleBackdrop(event)">
     <span class="media-close" onclick="closeModal()">×</span>
 
     <button class="media-nav left" onclick="prevMedia()">‹</button>
@@ -135,57 +136,76 @@ document.querySelectorAll('video').forEach(v=>observer.observe(v));
 <script>
 let mediaItems = [];
 let currentIndex = 0;
-let startX = 0;
+let startX = null;
 
-function initMediaViewer() {
+window.addEventListener('load', () => {
     mediaItems = Array.from(document.querySelectorAll('.media-card img, .media-card video'));
 
     mediaItems.forEach((item, index) => {
-        item.addEventListener('click', () => openModal(index));
+        item.addEventListener('click', e => {
+            e.stopPropagation();
+            openModal(index);
+        });
     });
-}
+});
 
 function openModal(index) {
     currentIndex = index;
+
     const modal = document.getElementById('mediaModal');
     const content = document.getElementById('mediaContent');
 
-    content.innerHTML = '';
+    cleanupModal();
     document.body.style.overflow = 'hidden';
 
     const original = mediaItems[index];
-    let clone;
+    let media;
 
     if (original.tagName === 'VIDEO') {
-        clone = original.cloneNode(true);
-        clone.controls = true;
-        clone.muted = false;
-        clone.playsInline = true;
-        clone.play();
+        media = original.cloneNode(true);
+        media.controls = true;
+        media.muted = false;
+        media.playsInline = true;
+        media.currentTime = 0;
+        media.play();
     } else {
-        clone = document.createElement('img');
-        clone.src = original.src;
+        media = document.createElement('img');
+        media.src = original.src;
     }
 
-    clone.addEventListener('touchstart', e => {
+    media.addEventListener('touchstart', e => {
         startX = e.touches[0].clientX;
     });
 
-    clone.addEventListener('touchend', e => {
-        const endX = e.changedTouches[0].clientX;
-        if (endX - startX > 50) prevMedia();
-        if (startX - endX > 50) nextMedia();
+    media.addEventListener('touchend', e => {
+        if (startX === null) return;
+        const diff = e.changedTouches[0].clientX - startX;
+        if (diff > 60) prevMedia();
+        if (diff < -60) nextMedia();
+        startX = null;
     });
 
-    content.appendChild(clone);
+    content.appendChild(media);
     modal.classList.add('active');
 }
 
 function closeModal() {
-    const modal = document.getElementById('mediaModal');
-    modal.classList.remove('active');
-    document.getElementById('mediaContent').innerHTML = '';
+    cleanupModal();
     document.body.style.overflow = '';
+}
+
+function cleanupModal() {
+    const modal = document.getElementById('mediaModal');
+    const content = document.getElementById('mediaContent');
+
+    const video = content.querySelector('video');
+    if (video) {
+        video.pause();
+        video.src = '';
+    }
+
+    content.innerHTML = '';
+    modal.classList.remove('active');
 }
 
 function nextMedia() {
@@ -198,14 +218,17 @@ function prevMedia() {
     openModal(currentIndex);
 }
 
+function handleBackdrop(e) {
+    if (e.target.id === 'mediaModal') {
+        closeModal();
+    }
+}
+
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal();
     if (e.key === 'ArrowRight') nextMedia();
     if (e.key === 'ArrowLeft') prevMedia();
 });
-
-window.addEventListener('load', initMediaViewer);
 </script>
-
 </body>
 </html>
