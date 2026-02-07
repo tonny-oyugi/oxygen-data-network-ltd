@@ -123,6 +123,15 @@ if(!e.isIntersecting && !e.target.paused){ e.target.pause(); }
 
 document.querySelectorAll('video').forEach(v=>observer.observe(v));
 </script>
+<!-- FULLSCREEN MEDIA MODAL -->
+<div id="mediaModal" class="media-modal">
+    <span class="media-close" onclick="closeModal()">×</span>
+
+    <button class="media-nav left" onclick="prevMedia()">‹</button>
+    <button class="media-nav right" onclick="nextMedia()">›</button>
+
+    <div class="media-content" id="mediaContent"></div>
+</div>
 
 </body>
 </html>
