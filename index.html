@@ -136,3 +136,113 @@ document.querySelectorAll('video').forEach(v=>observer.observe(v));
 
 </body>
 </html>
+
+<script>
+/* ===============================
+   FULLSCREEN CONTROLLER (FINAL)
+   - One state
+   - One listener
+   - No stacking
+================================ */
+(() => {
+  const fs = document.getElementById('fs');
+  const stage = fs.querySelector('.fs-stage');
+  const btnClose = fs.querySelector('.fs-close');
+  const btnPrev = fs.querySelector('.fs-prev');
+  const btnNext = fs.querySelector('.fs-next');
+
+  let items = [];
+  let index = 0;
+  let startX = null;
+
+  // Collect media ONCE per page
+  function collect() {
+    items = Array.from(document.querySelectorAll('.media-card img, .media-card video'));
+  }
+
+  function openAt(i) {
+    index = i;
+    cleanup();
+    document.body.style.overflow = 'hidden';
+    fs.classList.remove('hidden');
+    fs.setAttribute('aria-hidden', 'false');
+
+    const src = items[index];
+    let node;
+
+    if (src.tagName === 'VIDEO') {
+      node = src.cloneNode(true);
+      node.controls = true;
+      node.muted = false;
+      node.playsInline = true;
+      node.currentTime = 0;
+      node.play();
+    } else {
+      node = document.createElement('img');
+      node.src = src.src;
+      node.alt = src.alt || '';
+    }
+
+    // Swipe
+    node.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive:true});
+    node.addEventListener('touchend', e => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (dx > 60) prev();
+      if (dx < -60) next();
+      startX = null;
+    });
+
+    stage.appendChild(node);
+  }
+
+  function cleanup() {
+    const v = stage.querySelector('video');
+    if (v) { v.pause(); v.src = ''; }
+    stage.innerHTML = '';
+  }
+
+  function close() {
+    cleanup();
+    fs.classList.add('hidden');
+    fs.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function next() {
+    index = (index + 1) % items.length;
+    openAt(index);
+  }
+
+  function prev() {
+    index = (index - 1 + items.length) % items.length;
+    openAt(index);
+  }
+
+  // Delegated open (ONE listener)
+  document.addEventListener('click', e => {
+    const media = e.target.closest('.media-card img, .media-card video');
+    if (!media) return;
+    collect();
+    openAt(items.indexOf(media));
+  });
+
+  // Controls
+  btnClose.addEventListener('click', close);
+  btnNext.addEventListener('click', next);
+  btnPrev.addEventListener('click', prev);
+
+  // Backdrop close
+  fs.addEventListener('click', e => {
+    if (e.target === fs) close();
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (fs.classList.contains('hidden')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
