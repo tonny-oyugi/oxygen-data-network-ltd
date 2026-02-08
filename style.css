@@ -274,3 +274,61 @@ footer {
 .media-modal {
     touch-action: pan-y;
 }
+
+
+/* ===============================
+   FULLSCREEN VIEWER (FINAL)
+================================ */
+.fs {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.95);
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+}
+.fs.hidden { display: none; }
+
+.fs-stage {
+  max-width: 100%;
+  max-height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.fs-stage img,
+.fs-stage video {
+  max-width: 100vw;
+  max-height: 100vh;
+  width: auto;
+  height: auto;
+}
+
+.fs-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 32px;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.fs-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+.fs-prev { left: 10px; }
+.fs-next { right: 10px; }
+
+@media (max-width: 768px) {
+  .fs-nav { font-size: 36px; }
+}
