@@ -140,6 +140,18 @@ onclick="this.previousElementSibling.scrollBy({left:320,behavior:'smooth'})">›
 
 </body>
 </html>
+<script>
+/* ===============================
+   GALLERY RESET (AUTHORITATIVE)
+================================ */
+function resetGallery(btn) {
+  const section = btn.closest('section');
+  const gallery = section.querySelector('.horizontal-gallery');
+  if (gallery) {
+    gallery.scrollTo({ left: 0, behavior: 'smooth' });
+  }
+}
+</script>
 
 <script>
 /* ===============================
